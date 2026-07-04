@@ -1,0 +1,32 @@
+## Output folders (LaTeX Workshop and compilers)
+out/
+out_dir/
+build/
+%OUTDIR%/
+
+## Common auxiliary files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.out
+
+## Indices and Bibliography files
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+
+## Exclude local editor settings
+.vscode/
+
+## Exclude system files
+.DS_Store
+Thumbs.db

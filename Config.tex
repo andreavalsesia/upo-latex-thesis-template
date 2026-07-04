@@ -1,0 +1,192 @@
+% =========================================================================
+% Developed and maintained by Andrea Valsesia. 
+% This project is not affiliated with "Università del Piemonte Orientale" in any way. 
+% The end user is solely responsible for any unauthorized or illegal use of official university logos distributed with this template.
+%
+% Distributed under the MIT License.
+% This project can be freely modified and redistributed as long as this copyright notice is always included in all source files.
+% =========================================================================
+
+% --- DEBUG --- %
+% \usepackage{showframe}
+\usepackage{lua-ul}
+\usepackage{luacolor}
+\usepackage{fvextra}
+\fvinlineset{
+    breaklines=true,
+    breakanywhere=true
+}
+\makeatletter
+\g@addto@macro\FancyVerbFormatInline{\highLight[lightgray!40]}
+\makeatother
+
+% --- LAYOUT AND DIMENSIONS ---
+\usepackage[
+    inner=2.5cm,
+    outer=3cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=0pt,
+    headsep=0pt,
+    bindingoffset=0.5cm,
+    footskip=1.25cm
+]{geometry}
+\usepackage{parskip}
+
+% --- LANGUAGE AND TYPOGRAPHY ---
+\usepackage{babel}                       % Titles of elements (e.g. "Figure 1:", "Chapter 1:", "Table 3:") are automatically translated according to target language
+\usepackage{microtype}
+\usepackage{lettrine}                    % The big letter at the top of chapters
+\usepackage{etoolbox}
+\usepackage{siunitx}                     % Professional International System units
+\usepackage[version=4]{mhchem}           % Professional inline chemical formulas
+
+\DeclareSIUnit{\rpm}{rpm}                % Setup a command for unit "revolutions per minute". Add other lines like that to add custom units
+
+% --- FONTS ---
+\usepackage{anyfontsize}
+\usepackage{fontspec}                    % Use custom fonts. WARNING: The fonts used must be installed on your computer to compile the document. If the font is not found, latex will fallback to default fonts
+\setmainfont{Times New Roman}
+\setsansfont{Fira Sans}
+
+% --- OTHER PACKAGES ---
+\usepackage{lipsum}                      % Generates lorem ipsum paragraphs as a placeholder
+\usepackage{graphicx}                    % Include images and other assets in your document
+\usepackage[labelfont=bf]{caption}       % Add captions under images and plots
+\usepackage{float}
+\usepackage[svgnames]{xcolor}
+\usepackage{amssymb}
+\usepackage{comment}
+\usepackage{multicol}                    % Divide the page in vertical columns (like in scientific papers)
+\usepackage{tabularx}                    % Create better data tables
+
+\usepackage{pageslts}
+\usepackage{ifoddpage}                   % Check if page is odd o even in order to procedurally add different elements
+\usepackage{tikz}                        % Graphic library for complex plots and virtually any image (the syntax is similar to R language)
+\usetikzlibrary{calc}
+\usepackage{afterpage}
+\usepackage{eso-pic}
+
+\usepackage{datetime}
+\newdateformat{monthyeardate}{\monthname[\THEMONTH]\ \THEYEAR}
+
+% --- BIBLIOGRAPHY ---
+\usepackage{csquotes}
+\usepackage[style=numeric, sorting=none, giveninits=true, uniquename=init, maxbibnames=99]{biblatex}
+\setlength{\bibitemsep}{\baselineskip}
+
+\usepackage{hyperref}
+\pdfvariable omitcidset=1
+
+% --- NUMBERING FOR CHAPTERS (1.) ---
+
+\DeclareFieldFormat{labelnumberwidth}{\bfseries{#1.}}
+
+% --- BIBLIOGRAPHY STYLE ---
+
+\DeclareNameAlias{author}{family-given} % Format author names as: Surname, Name. (Rossi, M.)
+\renewcommand{\finalnamedelim}{\addcomma\space and\space} % Add a comma before the last "and"
+\renewcommand{\multinamedelim}{\addcomma\space} % Separate authors with a comma. (Rossi, M., Verdi, G.)
+
+\DeclareFieldFormat{journaltitle}{#1}
+\DeclareFieldFormat{pages}{#1}
+
+\DeclareBibliographyDriver{article}{%
+    \usebibmacro{begentry}%
+    \usebibmacro{author}\addspace%
+    \printtext[parens]{\printfield{year}}\addperiod\addspace%
+    \printfield[titlecase]{title}\addperiod\space%
+    \printfield[plain]{journaltitle}\addspace%
+    \textit{\printfield{volume}}\addcomma\space%
+    \setunit{}\printfield{pages}\addperiod%
+    \usebibmacro{finentry}%
+}
+
+\renewbibmacro{in:}{}%
+\renewcommand{\bibsetup}{\raggedright}%
+
+\addbibresource{bibliography.bib}
+
+% --- HEADER AND FOOTER of the page (fancyhdr) ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\bfseries\sffamily\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+    \fancyhead{}
+}
+
+\linespread{1.25}
+
+% --- CHAPTER STYLES ---
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+{}
+{\fontsize{22}{0}\sffamily\selectfont\color{gray!50}\textls*[110]{CAPITOLO \ \thechapter}}  % Change this text to modify the chapter label (output: CAPITOLO 1)
+{-10pt}
+{\Huge\bfseries\color{black}\textsc}
+
+\titlespacing*{\chapter}{0pc}{8pc}{3pc}
+
+% --- SECTION STYLES ---
+\titleformat{\section}
+{\sffamily\selectfont\large\bfseries}
+{\thesection}
+{1em}
+{}
+
+\titleformat{\subsection}
+{\sffamily\selectfont\normalsize\bfseries}
+{\thesubsection}
+{1em}
+{}
+
+\titlespacing*{\subsection}{0pt}{5ex}{2ex}
+
+% --- CHAPTER THUMBS ---
+\newbool{drawBackground}
+\boolfalse{drawBackground}
+
+\newcommand{\startThumbs}{%
+    \afterpage{\global\booltrue{drawBackground}}%
+}
+
+\newcommand{\stopThumbs}{%
+    \afterpage{\global\boolfalse{drawBackground}}%
+}
+
+\AddToHook{shipout/background}{%
+    \ifbool{drawBackground}{%
+        \ifodd\value{page}%
+            \begin{tikzpicture}[remember picture, overlay]
+                \coordinate (start) at ([xshift=2pt, yshift=-2.5cm-1.5cm*(\thechapter-1)]current page.north east);
+                \coordinate (end) at ([xshift=-2cm, yshift=-1.5cm]start);
+                \fill[black] (start) rectangle (end);
+                \node[text=white, font=\huge\bfseries\sffamily] at ($(start)!0.5!(end)$) {\thechapter};
+                \node[text=black, font=\small, rotate=90, anchor=east] at ($(start)!0.5!(end)$) [xshift=-1.5cm] {\rightmark};
+            \end{tikzpicture}%
+        \else%
+            \begin{tikzpicture}[remember picture, overlay]
+                \coordinate (start) at ([xshift=-2pt, yshift=-2.5cm-1.5cm*(\thechapter-1)]current page.north west);
+                \coordinate (end) at ([xshift=2cm, yshift=-1.5cm]start);
+                \fill[black] (start) rectangle (end);
+                \node[text=white, font=\huge\bfseries\sffamily] at ($(start)!0.5!(end)$) {\thechapter};
+                \node[text=black, font=\small, rotate=90, anchor=east] at ($(start)!0.5!(end)$) [xshift=-1.5cm] {\leftmark};
+            \end{tikzpicture}%
+        \fi%
+    }{\relax}%
+}
+% --- END OF CHAPTER THUMBS SETUP ---
+
+% --- SIDE MARKS ---
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}}
+
+% --- LETTRINE ---
+\setcounter{DefaultLines}{3}
+%\renewcommand{\DefaultLoversize}{1}
+%\renewcommand{\DefaultLhang}{0.3}

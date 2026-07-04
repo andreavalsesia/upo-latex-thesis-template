@@ -1,0 +1,49 @@
+\lettrine{W}{elcome} to this \LaTeX\ template for a professional-looking research thesis. The following chapter will serve as the introduction to your awesome thesis; however, within the context of this template, I will use it to show you an example of what \LaTeX\ is capable of and how to achieve it in the simplest and most straightforward way. If you are reading this page, congratulations! You have already accomplished the most difficult task: successfully compiling the PDF document. If you want to see how this text was written, open the file \Verb|chapters/Introduzione.tex| in the project folder.
+
+You have certainly noticed the large initial letter at the beginning of the previous paragraph. Adding one is very simple using the command \Verb|\lettrine{}{}|. The first argument is the large letter, and the second argument is the subsequent uppercase string. For example, you can write \Verb|\lettrine{W}{elcome}| to obtain the output shown at the start of this chapter.
+
+\section{Paragraphs and text formatting}
+
+This is a \Verb|\section|, a fundamental element for organizing a thesis and managing long documents.
+
+\subsection{Subsections}
+
+You can even create \Verb|\subsection| blocks. \LaTeX\ will automatically maintain an updated table of contents at the beginning of the document. In addition, this template generates elegant side margins showing the title of the main section on each page.
+
+To start a new paragraph, do not use any specific command. Simply leave an empty line in your source code, and \LaTeX\ will handle the formatting for you. This template replaces the default first-line indentation with a clean, modern blank space between paragraphs.
+
+\LaTeX\ offers many commands to easily style your text. You can make the text \textbf{bold}, \textit{italic}, \textsc{smallcaps}, \texttt{monospaced}, etc\dots
+
+\subsection{How to write your chapters}
+
+To keep the project neat and organized, you should not write your thesis text directly inside the \Verb|main.tex| file. Instead, the body of each chapter is stored as a separate \Verb|.tex| file inside the \Verb|chapters/| folder.
+
+These files are dynamically loaded into the main document using the \Verb|\input{chapters/filename.tex}| command. When you are ready to create a new chapter, simply:
+\begin{enumerate}
+    \item Create a new \Verb|.tex| file inside the \Verb|chapters/| folder.
+    \item Open \Verb|main.tex|, find the section labeled \texttt{--- MAIN MATTER ---}, and link your new file by adding \Verb|\chapter{Your Chapter Title}| followed by \Verb|\input{chapters/your-file-name.tex}|.
+\end{enumerate}
+
+If you want the chapter thumbs in the margins, add \Verb|\startThumbs{}| before \Verb|\chapter{}| and \Verb|\stopThumbs{}| after \Verb|\input{}|.
+
+In any case, this project already provides all the chapter files needed for a thesis. Wipe this example chapter to write your introduction.
+
+\section{Figures and graphical elements}
+
+This project includes a convenient folder called \Verb|images|. You can add subfolders to further organize your visual assets and access them inside a \Verb|{figure}| environment using \Verb|\includegraphics{images/path-to-your-image}|. You can use bitmap formats, such as .png or .jpg, or alternatively, convert an .svg file to .pdf to take advantage of the lossless quality of vector graphics.
+
+You can use the \Verb|\caption{}| command to add a caption below the figure. To reference the figure within the text, add the command \Verb|\label{fig:your-image-name}| inside the figure environment and refer to it using \Verb|\ref{fig:your-image-name}|.
+
+\section{Chemical formulas and units}
+
+This template includes a set of packages that enable the professional typesetting of chemical formulas and SI units. To write a chemical formula like \ce{H2O}, always use \Verb|\ce{H2O}|. A chemical reaction like \ce{A ->[k_1] B} is written with this syntax: \Verb|\ce{A ->[k_1] B}|. For more information, visit \href{https://it.overleaf.com/learn/latex/Chemistry_formulae}{this Overleaf tutorial}.
+
+To write a unit of measurement on its own, use \Verb|\unit{\meter}| or \Verb|\unit{\meter\per\second}|. To write values with units, such as \qty{10}{\kilo\gram}, \qty{24}{\celsius}, or \qty{50}{\percent}, use the \Verb|\qty{value}{unit}| command. For further details, see the \href{https://texdoc.org/serve/siunitx/0}{Siunitx documentation}.
+
+\section{Bibliography and citations}
+
+UPO guidelines require the Cell citation style. This template implements a custom biblatex style that strictly follows these official guidelines. In your project folder, you will find a \Verb|bibliography.bib| file. Whenever you want to add a new citation to your thesis, add a new \Verb|@article| object to this .bib file (a sample entry is already provided), then you can cite it using \Verb|\supercite{}|. Each article in the .bib file has a unique ID. To add a citation like this\supercite{Rossi2025}, simply write \Verb|\supercite{Rossi2025}| exactly where the citation belongs. You can also cite multiple sources simultaneously by separating their unique IDs with a comma. Don't worry! Biblatex is smart: the final Bibliography chapter will automatically display only the articles effectively cited in your text, sorted in order of appearance. Some third-party reference managers (\href{https://github.com/andreavalsesia/pubmed-to-bibtex.git}{like this one}) can help you populate your .bib file much faster.
+
+\section{Long paragraph layout showcase}
+
+\lipsum[1-4]

@@ -1,0 +1,114 @@
+% =========================================================================
+% Developed and maintained by Andrea Valsesia. 
+% This project is not affiliated with "Università del Piemonte Orientale" in any way. 
+% The end user is solely responsible for any unauthorized or illegal use of official university logos distributed with this template.
+%
+% Distributed under the MIT License.
+% This project can be freely modified and redistributed as long as this copyright notice is always included in all source files.
+% =========================================================================
+
+% =========================================================
+% DOCUMENT CONFIGURATION
+% =========================================================
+\DocumentMetadata{pdfstandard=A-3u, pdfversion=1.7, lang=it} % Compile the document using PDF-A standards (required for official thesis documents). Change "lang" to lang=en if you plan to write the thesis in English
+\documentclass[
+    italian,          % Set to italian or english according to language requirements
+    12pt,
+    a4paper,
+    twoside,
+]{book}
+
+\input{Config.tex}
+
+% =========================================================
+% USER VARIABLES     (Insert your values)
+% =========================================================
+
+\newcommand{\ThesisTitle}{Title of the thesis}
+\newcommand{\AuthorName}{Mario Rossi}
+\newcommand{\City}{Novara}
+
+\hypersetup{                            % Add metadata to your exported document.
+    pdftitle={\ThesisTitle},
+    pdfauthor={\AuthorName},
+    pdfsubject={Tesi di Laurea},
+    colorlinks=true,                    % Do you want colored links inside text?
+    linkcolor=black,                    % Color for hyperlinks (www.example.com). Default is black
+    citecolor=gray                      % Color for inline bibliography citation numbers ([1-3]). Default is gray
+}
+
+% =========================================================
+% DOCUMENT BEGIN
+% =========================================================
+\begin{document}
+\stopThumbs
+
+% --- FRONT MATTER (Initial pages with roman numbers) ---
+\frontmatter
+
+\pagenumbering{Roman}
+
+\begin{titlepage}
+    \input{Copertina.tex}
+\end{titlepage}
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}                                          % This section is printed on the back of the cover like the one you can find in books
+    {\small \it
+        % Copyright \copyright\ \the\year\ -- 
+        \AuthorName\\
+        % Tutti i diritti riservati.\\
+
+        \City, \monthyeardate\today                     % The "publication date" will update automatically at each compilation
+    }
+\end{center}
+
+\chapter*{\centering Abstract}
+\thispagestyle{plain}
+\addcontentsline{toc}{chapter}{Abstract}
+\input{chapters/00-Abstract.tex}
+
+\tableofcontents
+\thispagestyle{plain}
+
+% --- MAIN MATTER (Body of the document) ---
+\mainmatter
+\pagenumbering{arabic}
+
+% This section adds all the chapters from separate files. If you want to add or modify a chapter, copy-paste one of these snippets and enter the correct filename in the "/input" line
+
+\chapter{Introduzione}                   % Name of the chapter
+\startThumbs                             % Start drawing the chapter thumbs in the page margin (remove if you don't want them)
+\input{chapters/01-Introduzione.tex}     % Path to the source file of this chapter
+\stopThumbs                              % Stop drawing the chapter thumbs. This command prevents drawing chapter thumbs on empty pages.
+
+\chapter{Scopo della Tesi}
+\startThumbs
+\input{chapters/02-Scopo.tex}
+\stopThumbs
+
+\chapter{Materiali e Metodi}
+\startThumbs
+\input{chapters/03-Metodi.tex}
+\stopThumbs
+
+\chapter{Risultati}
+\startThumbs
+\input{chapters/04-Risultati.tex}
+\stopThumbs
+
+\chapter{Conclusioni}
+\startThumbs
+\input{chapters/05-Conclusioni.tex}
+\stopThumbs
+
+\chapter*{Bibliografia}
+\addcontentsline{toc}{chapter}{Bibliografia}               % This is necessary to show the bibliography chapter in the table of contents
+\renewcommand*{\bibfont}{\fontsize{10}{12}\selectfont}     % Set font and font size for bibliography according to guidelines
+% \begin{multicols}{2}                                     % Uncomment this line if you want two-columns bibliography
+\printbibliography[heading=none]
+% \end{multicols}
+
+\cleardoublepage
+\end{document}
