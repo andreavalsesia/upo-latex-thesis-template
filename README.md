@@ -16,7 +16,9 @@ This document is not an official template. It's maintained by students for stude
 
 ### Option 2: Local usage inside your editor (VS Code, TeXworks, Texmaker)
 Install an up-to-date LaTeX distribution (TeX Live 2025+, MacTeX or MiKTeX) and follow your standard compilation workflow using the **LuaLaTeX** engine (`latexmk` is highly recommended for automatic management of bibliography and cross-references).
+
 **IMPORTANT NOTE ON FONTS:** This document relies on system fonts (*Times New Roman* and *Fira Sans*). While Times New Roman is usually pre-installed on Windows and macOS, Fira Sans might not be. If a font is missing on your system, the compiler will automatically fall back to default fonts (like *Latin Modern*). You can change the fonts in `Config.tex` or install the required fonts.
+
 ---
 
 ## Project Structure
