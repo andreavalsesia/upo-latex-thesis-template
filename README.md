@@ -4,6 +4,8 @@ This LateX template is designed to be modern and clean. The code is meticulously
 
 This document is not an official template. It's maintained by students for students as an open-source project and it's not affiliated to UPO in any way. The logos distributed with this project are intended for internal or authorized use only. The end user is responsible for any illegal use of this content.
 
+<img width="1885" height="1322" alt="TemplatePreview" src="https://github.com/user-attachments/assets/339fae0b-52b4-457a-9427-b2393f3b9bb3" />
+
 ---
 
 ## How to use this template
