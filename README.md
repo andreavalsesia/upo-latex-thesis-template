@@ -16,7 +16,8 @@ This document is not an official template. It's maintained by students for stude
 1. Download this project as `.zip` (on the main page of this GitHub repo, click on **Code** -> **Download ZIP** in the top-right of the screen).
 2. Open [Overleaf](https://www.overleaf.com) and login.
 3. Click **New Project** -> **Upload Project** and select the `.zip` file you just downloaded.
-4. **IMPORTANT:** In Overleaf, open the **Menu** and change your **Compiler** from *pdfLaTeX* to **LuaLaTeX**. Without this setting, the document might not compile or may differ from the expected result.
+4. **IMPORTANT:** In Overleaf, open **Settings** and change your **Compiler** from *pdfLaTeX* to **LuaLaTeX**. Without this setting, the document might not compile or may differ from the expected result.
+Most likely, the free tier offered by Overleaf does not have enough compile time to build this template. I strongly suggest to setup a local editor on your machine.
 
 ### Option 2: Local usage inside your editor (VS Code, TeXworks, Texmaker)
 Install an up-to-date LaTeX distribution (TeX Live 2025+, MacTeX or MiKTeX) and follow your standard compilation workflow using the **LuaLaTeX** engine (`latexmk` is highly recommended for automatic management of bibliography and cross-references).
